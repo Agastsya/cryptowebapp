@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { server } from "../index";
-import { Container, HStack } from "@chakra-ui/react";
+import { Button, Container, HStack } from "@chakra-ui/react";
 import Loader from "./Loader";
 import ExchangeCard from "./ExchangeCard";
 import ErrorComponent from "./ErrorComponent";
@@ -16,6 +16,11 @@ const Coins = () => {
 
   const currencySymbol =
     currency === "inr" ? "₹" : currency === "eur" ? "€ " : "$";
+  const changePage = (page) => {
+    setPage(page);
+    setLoading(true);
+  };
+  const btns = new Array(132).fill(1);
   useEffect(() => {
     const fetchCoins = async () => {
       try {
@@ -34,7 +39,7 @@ const Coins = () => {
   }, [currency, page]);
   if (error)
     return (
-      <ErrorComponent message={"This is an error caused by exchanges api"} />
+      <ErrorComponent message={"This is an error caused by fetching coins"} />
     );
 
   return (
@@ -46,12 +51,25 @@ const Coins = () => {
           <HStack wrap={"wrap"}>
             {coins.map((i) => (
               <CoinCard
+                key={i.id}
+                id={i.id}
                 name={i.name}
                 symbol={i.symbol}
                 img={i.image}
                 price={i.current_price}
                 currencySymbol={currencySymbol}
               />
+            ))}
+          </HStack>
+          <HStack w={"full"} overflowX={"auto"} p={"8"}>
+            {btns.map((item, index) => (
+              <Button
+                color={"white"}
+                bgColor={"blackAlpha.900"}
+                onClick={() => changePage(index + 1)}
+              >
+                {index + 1}
+              </Button>
             ))}
           </HStack>
         </>
