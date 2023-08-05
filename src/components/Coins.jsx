@@ -5,6 +5,7 @@ import { Container, HStack } from "@chakra-ui/react";
 import Loader from "./Loader";
 import ExchangeCard from "./ExchangeCard";
 import ErrorComponent from "./ErrorComponent";
+import CoinCard from "./CoinCard";
 
 const Coins = () => {
   const [coins, setCoins] = useState([]);
@@ -12,6 +13,9 @@ const Coins = () => {
   const [error, setError] = useState(false);
   const [page, setPage] = useState(1);
   const [currency, setCurrency] = useState("inr");
+
+  const currencySymbol =
+    currency === "inr" ? "₹" : currency === "eur" ? "€ " : "$";
   useEffect(() => {
     const fetchCoins = async () => {
       try {
@@ -41,11 +45,12 @@ const Coins = () => {
         <>
           <HStack wrap={"wrap"}>
             {coins.map((i) => (
-              <ExchangeCard
+              <CoinCard
                 name={i.name}
-                rank={i.trust_score_rank}
+                symbol={i.symbol}
                 img={i.image}
-                url={i.url}
+                price={i.current_price}
+                currencySymbol={currencySymbol}
               />
             ))}
           </HStack>
