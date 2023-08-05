@@ -27,7 +27,6 @@ const Coins = () => {
           `${server}/coins/markets?vs_currency=${currency}&page=${page}`
         );
         setCoins(data);
-        console.log(data);
         setLoading(false);
       } catch (error) {
         setError(true);
@@ -47,7 +46,7 @@ const Coins = () => {
         <Loader />
       ) : (
         <>
-          <HStack spacing={"4"}>
+          <HStack spacing={"4"} my={"4"}>
             <RadioGroup value={currency} onChange={setCurrency}>
               <Radio value="inr" mx={"1"}>
                 {currencySymbol} INR{" "}
@@ -60,7 +59,7 @@ const Coins = () => {
               </Radio>
             </RadioGroup>
           </HStack>
-          <HStack wrap={"wrap"}>
+          <HStack wrap={"wrap"} justifyContent={"space-evenly"}>
             {coins.map((i) => (
               <CoinCard
                 key={i.id}
