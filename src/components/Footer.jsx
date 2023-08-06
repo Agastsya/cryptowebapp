@@ -12,7 +12,7 @@ const Footer = () => {
     <Box bgColor={"black"} p={"4"} py={["5", "8"]}>
       <VStack textAlign={"center"}>
         <Text color={"whiteAlpha.700"}>
-          We are the best website for Crypto Trading <br />
+          We are the best website for Crypto News <br />
           <br />
           Contact Us <br />
           <HStack justifyContent={"center"} py={"4"}>
