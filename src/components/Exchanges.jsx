@@ -37,6 +37,7 @@ const Exchanges = () => {
           <HStack wrap={"wrap"} justifyContent={"space-evenly"}>
             {exchanges.map((i) => (
               <ExchangeCard
+                key={i.id}
                 name={i.name}
                 rank={i.trust_score_rank}
                 img={i.image}

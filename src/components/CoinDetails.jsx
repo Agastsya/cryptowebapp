@@ -21,6 +21,7 @@ import { server } from "../index";
 import axios from "axios";
 import ErrorComponent from "./ErrorComponent";
 import CustomBar from "./CustomBar";
+import Chart from "./Chart";
 
 const CoinDetails = () => {
   const params = useParams();
@@ -29,6 +30,8 @@ const CoinDetails = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [currency, setCurrency] = useState("inr");
+  const [days, setDays] = useState("24h");
+  const [chartArray, setChartArray] = useState([]);
   const currencySymbol =
     currency === "inr" ? "₹" : currency === "eur" ? "€ " : "$";
 
@@ -36,8 +39,13 @@ const CoinDetails = () => {
     const fetchCoins = async () => {
       try {
         const { data } = await axios.get(`${server}/coins/${params.id}`);
+        const { data: chartData } = await axios.get(
+          `${server}/coins/${params.id}/market_chart?vs_currency=${currency}&days=${days}`
+        );
+
+        console.log(chartData);
         setCoins(data);
-        console.log(data);
+        setChartArray(chartData);
         setLoading(false);
       } catch (error) {
         setError(true);
@@ -55,7 +63,13 @@ const CoinDetails = () => {
         <Loader />
       ) : (
         <>
-          <Box w={"full"} borderWidth={"1"}></Box>
+          <Box w={"full"} borderWidth={"1"}>
+            <Chart
+              currency={currencySymbol}
+              arr={chartArray.prices}
+              days={days}
+            />
+          </Box>
 
           {/* BUTTONS THAT WILL CHANGE DATA ACC. TO TIME */}
           <HStack spacing={"4"} my={"4"}>
