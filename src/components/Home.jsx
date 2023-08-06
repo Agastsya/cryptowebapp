@@ -1,32 +1,45 @@
 import React from "react";
 import { Text, Box, Image, VStack } from "@chakra-ui/react";
 import bitcoin from "../assets/bitcoin.png";
+import { motion } from "framer-motion";
 
 const Home = () => {
   return (
-    <div>
-      <Box w={"full"} h={"85vh"} bgColor={"black"}>
-        <VStack>
-          <Image
-            src={bitcoin}
-            objectFit={"contain"}
-            w={"33rem"}
-            h={"33rem"}
-            filter={"grayscale(1)"}
-          />
-          <Text
-            fontSize={"6xl"}
-            color={"white"}
-            textAlign={"center"}
-            h={"full"}
-            w={"full"}
-            fontFamily={"Roboto Condensed"}
-          >
-            CRYPTO CRASH
-          </Text>
-        </VStack>
-      </Box>
-    </div>
+    <Box boxSizing={"border-box"} w={"full"} maxH={"90vh"} bgColor={"black"}>
+      <motion.div
+        style={{
+          height: "75vh",
+        }}
+        animate={{
+          translateY: "20px",
+        }}
+        transition={{
+          duration: 2,
+          repeat: Infinity,
+          repeatType: "reverse",
+        }}
+      >
+        <Image
+          src={bitcoin}
+          objectFit={"contain"}
+          w={["20rem", "33rem"]}
+          h={["20rem", "33rem"]}
+          filter={"grayscale(1)"}
+          position={"relative"}
+          left={["12%", "33%"]}
+        />
+      </motion.div>
+      <Text
+        fontSize={["2xl", "6xl"]}
+        color={"white"}
+        textAlign={"center"}
+        h={["full"]}
+        w={["full"]}
+        fontFamily={"Roboto Condensed"}
+      >
+        CRYPTO CRASH
+      </Text>
+    </Box>
   );
 };
 
