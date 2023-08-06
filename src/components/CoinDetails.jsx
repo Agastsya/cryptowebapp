@@ -13,6 +13,7 @@ import {
   StatHelpText,
   StatArrow,
   Badge,
+  Button,
 } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
 import Loader from "./Loader";
@@ -32,6 +33,46 @@ const CoinDetails = () => {
   const [currency, setCurrency] = useState("inr");
   const [days, setDays] = useState("24h");
   const [chartArray, setChartArray] = useState([]);
+  const btns = ["24h", "7d", "14d", "30d", "200d", "1y", "max"];
+
+  // PASSING KEY TO SwitchChartStats
+  const switchChartStats = (key) => {
+    switch (key) {
+      case "24h":
+        setDays("24h");
+        setLoading(false);
+        break;
+      case "7d":
+        setDays("7d");
+        setLoading(false);
+        break;
+      case "14d":
+        setDays("14d");
+        setLoading(false);
+        break;
+      case "30d":
+        setDays("30d");
+        setLoading(false);
+        break;
+      case "200d":
+        setDays("200d");
+        setLoading(false);
+        break;
+      case "1y":
+        setDays("1y");
+        setLoading(false);
+        break;
+      case "max":
+        setDays("max");
+        setLoading(false);
+        break;
+
+      default:
+        setDays("24h");
+        setLoading(false);
+        break;
+    }
+  };
   const currencySymbol =
     currency === "inr" ? "₹" : currency === "eur" ? "€ " : "$";
 
@@ -53,7 +94,7 @@ const CoinDetails = () => {
       }
     };
     fetchCoins();
-  }, [currency, params.id]);
+  }, [currency, params.id, days]);
 
   if (error) <ErrorComponent message={"Error in fetching coin info"} />;
 
@@ -70,6 +111,13 @@ const CoinDetails = () => {
               days={days}
             />
           </Box>
+          <HStack p={"4"} wrap={"wrap"}>
+            {btns.map((i) => (
+              <Button key={i} onClick={() => switchChartStats(i)}>
+                {i}
+              </Button>
+            ))}
+          </HStack>
 
           {/* BUTTONS THAT WILL CHANGE DATA ACC. TO TIME */}
           <HStack spacing={"4"} my={"4"}>
