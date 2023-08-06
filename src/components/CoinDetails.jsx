@@ -123,13 +123,13 @@ const CoinDetails = () => {
           <HStack spacing={"4"} my={"4"}>
             <RadioGroup value={currency} onChange={setCurrency}>
               <Radio value="inr" mx={"1"}>
-                {currencySymbol} INR{" "}
+                ₹ INR{" "}
               </Radio>
               <Radio value="eur" mx={"1"}>
-                {currencySymbol} EUR{" "}
+                € EUR{" "}
               </Radio>
               <Radio value="usd" mx={"1"}>
-                {currencySymbol} USD{" "}
+                $ USD{" "}
               </Radio>
             </RadioGroup>
           </HStack>
