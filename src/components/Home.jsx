@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, Box, Image, VStack } from "@chakra-ui/react";
+import { Text, Box, Image } from "@chakra-ui/react";
 import bitcoin from "../assets/bitcoin.png";
 import { motion } from "framer-motion";
 
@@ -26,7 +26,7 @@ const Home = () => {
           h={["20rem", "33rem"]}
           filter={"grayscale(1)"}
           position={"relative"}
-          left={["12%", "33%"]}
+          mx={["auto", "auto"]}
         />
       </motion.div>
       <Text
